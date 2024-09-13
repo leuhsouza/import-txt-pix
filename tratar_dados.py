@@ -72,7 +72,8 @@ def process_excel():
     #ultima_linha = df.dropna(how='all')
     # Encontra o índice da última linha com valor
     ultima_linha = df.dropna(how='all').index[-1]
-    df.at[ultima_linha + 1,'Valor'] = operacoes_value
+    # rever esse df.at para colocar valores em uma linha e duas colunas
+    df.at[ultima_linha + 1,('Valor','ValorPag')] = operacoes_value
     df.at[ultima_linha + 2,'ValorPag'] = taxa_value
     #df.at[]
 
