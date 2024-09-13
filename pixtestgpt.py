@@ -84,7 +84,7 @@ def gerar_linhas_contabeis(df):
         complemento = ""
         complemento = complemento[:255]
         
-        linha = f"200{numero_lancamento:02}{valor_formatado}C{conta_formatada}{'0408'}{complemento:<255}"
+        linha = f"200{numero_lancamento:02}{valor_formatado}C{conta_formatada}{'0413'}{complemento:<255}"
         lancamentos.append((linha, conta, situacao, valor_total, complemento))
         
         numero_lancamento += 1
@@ -104,7 +104,7 @@ def gerar_linhas_contabeis(df):
         
         complemento = complemento[:255]
         
-        linha = f"200{numero_lancamento:02}{valor_formatado}C{conta_formatada}{'0408'}{complemento:<255}"
+        linha = f"200{numero_lancamento:02}{valor_formatado}C{conta_formatada}{'0413'}{complemento:<255}"
         lancamentos.append((linha, conta, '', valor_total, complemento))
         
         numero_lancamento += 1
@@ -121,8 +121,8 @@ def gerar_ultima_linha(lancamentos):
 def gerar_lancamento_debito_total(lancamentos):
     total_creditos = sum(l[3] for l in lancamentos)
     valor_formatado = f"{abs(total_creditos):016.2f}".replace('.', '')
-    linha = f"200{len(lancamentos) + 1:02}{valor_formatado}D{'30991'}{'0408'}{'Total de Créditos':<255}"
-    return (linha, '00000', '0408', total_creditos, 'Total de Créditos')
+    linha = f"200{len(lancamentos) + 1:02}{valor_formatado}D{'30991'}{'0409'}{'Total de Créditos':<255}"
+    return (linha, '00000', '0409', total_creditos, 'Total de Créditos')
 
 def salvar_arquivo_txt(conteudo):
     root = tk.Tk()
