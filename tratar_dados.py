@@ -46,13 +46,17 @@ def process_excel():
 
     if operacoes_rows.any():
         operacoes_value = df.loc[operacoes_rows, df.columns[8]].values[0]
+        txt_operacoes = df.loc[operacoes_rows, df.columns[7]].values[0]
     else:
         operacoes_value = None
+        txt_operacoes = None
 
     if taxa_rows.any():
         taxa_value = df.loc[taxa_rows, df.columns[8]].values[0]
+        txt_taxa = df.loc[taxa_rows, df.columns[7]].values[0]
     else:
         taxa_value = None
+        txt_taxa = None
 
     print("Valor de 'operações':", operacoes_value)
     print("Valor de 'Taxa':", taxa_value)
@@ -74,7 +78,13 @@ def process_excel():
     ultima_linha = df.dropna(how='all').index[-1]
     # rever esse df.at para colocar valores em uma linha e duas colunas
     df.at[ultima_linha + 1,('Valor','ValorPag')] = operacoes_value
-    df.at[ultima_linha + 2,'ValorPag'] = taxa_value
+    df.at[ultima_linha + 2,('Valor','ValorPag')] = taxa_value
+    df.at[ultima_linha + 1,('ContaDescricao')] = txt_operacoes
+    df.at[ultima_linha + 2,('ContaDescricao')] = txt_taxa
+    df.at[ultima_linha + 1,('Conta')] = '8888'
+    df.at[ultima_linha + 2,('Conta')] = '9999'
+
+
     #df.at[]
 
     #ordenar tabela por Conta
