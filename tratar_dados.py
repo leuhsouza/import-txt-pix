@@ -85,6 +85,18 @@ def process_excel():
     df.at[ultima_linha + 2,('Conta')] = '9999'
 
 
+    #calcula a coluna Juros e move ela para a posição 9
+    df['Juros'] = df['ValorPag'] - df['Valor']
+
+    # Substituindo valores negativos por zero
+    df['Juros'] = df['Juros'].clip(lower=0)
+
+    # Movendo a coluna 'Juros' para a posição 9
+    colunas = list(df.columns)
+    colunas.insert(9, colunas.pop(colunas.index('Juros')))
+    df = df[colunas]
+    # Adicionar Coluna "Contábil"
+    df.insert(3,'Contábil',[None] * len(df))
     #df.at[]
 
     #ordenar tabela por Conta
