@@ -61,10 +61,23 @@ def gerar_linhas_contabeis(df):
     # Filtra as contas que devem ser tratadas separadamente por situação
     contas_separadas = df[df['Conta'].isin(['101', '102', '106'])]
     contas_agrupadas = df[~df['Conta'].isin(['101', '102', '106'])]
+
+    
+    def convert_to_int(value):
+        try:
+            return int(value)
+        except ValueError:
+            return value
+        
+    contas_agrupadas['Conta'] = contas_agrupadas['Conta'].apply(convert_to_int)
+    contas_agrupadas = contas_agrupadas.sort_values(by='Conta', key=lambda x: pd.to_numeric(x, errors='coerce'))
     # Agrupa as contas separadas por Conta e Situacao
     grupos_separados = contas_separadas.groupby(['Conta', 'Situacao'])
     # Agrupa as demais contas apenas por Conta
     grupos_agrupados = contas_agrupadas.groupby(['Conta'])
+    for nome_grupo, grupo in grupos_agrupados:
+        print(f"Grupo: {nome_grupo}")
+        print(grupo)
     
     # Inicializa o número do lançamento
     numero_lancamento = 1
