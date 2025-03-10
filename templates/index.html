@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processar PDF</title>
+</head>
+<body>
+    <h1>Faça o upload do arquivo PDF</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="pdf_file">Escolha o arquivo PDF:</label>
+        <input type="file" id="pdf_file" name="pdf_file" required>
+        <br><br>
+        <input type="submit" value="Carregar PDF">
+    </form>
+</body>
+</html>
